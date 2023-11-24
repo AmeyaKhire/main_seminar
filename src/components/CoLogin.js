@@ -80,7 +80,7 @@ function StuLogin(props) {
 
   return (
     <>
-    <Navbar/>
+    <Navbar />
       <style>{styles}</style>
       <div 
         className='container-fluid'

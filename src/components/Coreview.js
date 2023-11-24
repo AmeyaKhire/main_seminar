@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, ListGroup, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +26,7 @@ function App() {
       
   }, []);
   
-
+console.log(students)
   // retrieve the list of students and guides from the server
   useEffect(() => {
     fetch('http://localhost:5000/get-students')
@@ -121,7 +122,7 @@ function App() {
             {students.map(student => (
               <ListGroup.Item
                 key={student.id}
-                active={selectedStudent && selectedStudent.id === student.id}
+                active={selectedStudent && selectedStudent.email === student.email}
                 onClick={() => setSelectedStudent(student)}
                 style={{ cursor: 'pointer' }}
               >
@@ -137,7 +138,7 @@ function App() {
             {guides.map(guide => (
               <ListGroup.Item
                 key={guide.id}
-                active={selectedGuide && selectedGuide.id === guide.id}
+                active={selectedGuide && selectedGuide.email === guide.email}
                 onClick={() => setSelectedGuide(guide)}
                 style={{ cursor: 'pointer' }}
               >
@@ -175,7 +176,7 @@ function App() {
               key={pair.student_id}
                 style={{ cursor: 'pointer' }}
               >
-                {pair.student_name} s
+                {pair.student_name} 
               </ListGroup.Item>
             ))}
           </ListGroup>
@@ -202,4 +203,3 @@ function App() {
 }
 
 export default App;
-

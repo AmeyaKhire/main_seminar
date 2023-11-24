@@ -82,7 +82,7 @@ function Review3() {
   return (
     <Container>
       <h1>Review 3</h1>
-      <h3>Upload Presentation</h3>
+      <h3>Upload Research Paper</h3>
       <Form onSubmit={handleSubmit} enctype="multipart/form-data">
         <Form.Group controlId="formFile">
           <Form.Label>Select a PowerPoint file</Form.Label>

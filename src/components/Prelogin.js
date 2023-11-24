@@ -10,7 +10,7 @@ function PreLoginPage() {
   
   
     const signUp = () => {
-        navigate('/prelogin');
+        navigate('/presignup');
       };
 
 const studentclick =()=>{

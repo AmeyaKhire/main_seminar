@@ -44,7 +44,6 @@ CREATE TABLE review1 (
   FOREIGN KEY (studentEmail) REFERENCES students(email)
 );
 select * from review1s;
-
 drop table review1s;
 truncate table review1s;
 
@@ -71,6 +70,7 @@ CREATE TABLE review3_results (
 select * from review3_results;
 truncate table review3_results;
 
+-- review 2
 CREATE TABLE Ppt (
   guideEmail VARCHAR(255) NOT NULL,
   studentEmail VARCHAR(255) NOT NULL,
@@ -83,6 +83,7 @@ select * from ppts;
 drop table ppts;
 truncate table ppts;
 
+-- review 3
 CREATE TABLE Ppt3 (
   guideEmail VARCHAR(255) NOT NULL,
   studentEmail VARCHAR(255) NOT NULL,
@@ -112,11 +113,11 @@ BEGIN
 END$$
 DELIMITER ;
 -- Call the stored procedure to update a student's email address
-CALL update_student_email('sid@gmail.com', 'new_sid@gmail.com');
+CALL update_student_email('ameyakhire@gmail.com', 'ameyakhire2@gmail.com');
 
 -- Trigger
 DELIMITER $$
--- Define a trigger that checks if a student's email address is valid
+-- A trigger that checks if a student's email address is valid
 CREATE TRIGGER validate_email
 BEFORE INSERT ON students
 FOR EACH ROW
@@ -127,33 +128,34 @@ BEGIN
   END IF;
 END $$
 DELIMITER ;
+
 INSERT INTO students (name, email, cpassword, confirmPassword, createdAt,updatedAt)
 VALUES ('Ameya Khire', 'ameya@gmail.com', 'password123', 'password123', NOW(),NOW());
 
 
 -- a. Insertion of data:
 INSERT INTO students (name, email, cpassword, confirmPassword)
-VALUES ('John Smith', 'john@example.com', 'password123', 'password123');
+VALUES ('Ameya Khire', 'ameyakhire@gmail.com', 'password123', 'password123');
 
 INSERT INTO guides (name, email, cpassword, confirmPassword)
-VALUES ('Jane Doe', 'jane@example.com', 'password123', 'password123');
+VALUES ('guide','guide@gmail.com', 'password123', 'password123');
 
 -- To create a relationship between the student and guide, we can insert a record into the selected_pairs table:
 INSERT INTO selected_pairs (student_id, student_name, student_email, guide_id, guide_name, guide_email)
-VALUES ((SELECT COUNT() FROM students), 'John Smith', 'john@example.com', (SELECT COUNT() FROM guides), 'Jane Doe', 'jane@example.com');
+VALUES ((SELECT COUNT(*) FROM students), 'Ameya khire', 'ameyakhire@gmail.com', (SELECT COUNT(*) FROM guides), 'guide', 'guide@gmail.com');
 
 -- We can also set up the foreign key constraints for the selected_pairs table to ensure that any changes made to the referenced tables will cascade to this table:
 ALTER TABLE selected_pairs ADD CONSTRAINT fk_student FOREIGN KEY (student_email) REFERENCES students(email) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE selected_pairs ADD CONSTRAINT fk_guide FOREIGN KEY (guide_email) REFERENCES guides(email) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- b. Updation of data:
-UPDATE students SET email = 'parasraut@example.com' WHERE name = 'paras raut';
+UPDATE students SET email = 'ameyakhire2@gmail.com' WHERE name = 'ameya khire';
 
 -- c. Deletion of data:
-DELETE FROM guides WHERE email = 'sid@example.com';
+DELETE FROM guides WHERE email = 'ameyakhire@gmail.com';
 
 -- d. Searching of data:
-SELECT * FROM selected_pairs WHERE guide_email = 'sid@example.com';
+SELECT * FROM selected_pairs WHERE guide_email = 'guide@gmail.com';
 
 
 
